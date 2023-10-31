@@ -1,13 +1,13 @@
-package com.practifinder.web_app_practifinder;
+package com.practifinder.webapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebAppPractifinderApplication {
+public class WebappApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebAppPractifinderApplication.class, args);
+		SpringApplication.run(WebappApplication.class, args);
 	}
 
 }
