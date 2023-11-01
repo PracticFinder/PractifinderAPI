@@ -4,6 +4,7 @@ import com.practifinder.webapp.practifinder.lifescape.domain.language.service.La
 import com.practifinder.webapp.practifinder.lifescape.mapping.language.LanguageMapper;
 import com.practifinder.webapp.practifinder.lifescape.resource.language.CreateLanguageResource;
 import com.practifinder.webapp.practifinder.lifescape.resource.language.LanguageResource;
+import com.practifinder.webapp.practifinder.lifescape.resource.language.UpdateLanguageResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,12 @@ public class LanguageController {
     @PostMapping
     public ResponseEntity<LanguageResource> createLanguage(@RequestBody CreateLanguageResource resource){
         return new ResponseEntity<>(mapper.toResource(languageService.create(mapper.toModel(resource))), HttpStatus.CREATED);
+    }
+
+    @PutMapping("{languageId}")
+    public LanguageResource updateLanguage(@PathVariable Long languageId,
+                                           @RequestBody UpdateLanguageResource resource){
+        return mapper.toResource(languageService.update(languageId,mapper.toModel(resource)));
     }
 
     @DeleteMapping("{languageId}")
