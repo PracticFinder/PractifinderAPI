@@ -1,6 +1,7 @@
 package com.practifinder.webapp.practifinder.profile.domain.student.service;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ public interface StudentService {
 
     Page<Student> getAll(Pageable pageable);
 
-    Student getById(Long studenId);
+    Student getById(Long studentId);
 
     Student create(Student student);
 
@@ -25,4 +26,5 @@ public interface StudentService {
 
     List<Skill> getSkillsByStudentId(Long studentId);
 
+    List<Language> getLanguagesByStudentId(Long studentId);
 }

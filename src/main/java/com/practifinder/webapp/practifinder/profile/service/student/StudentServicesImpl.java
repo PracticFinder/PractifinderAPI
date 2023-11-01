@@ -1,6 +1,7 @@
 package com.practifinder.webapp.practifinder.profile.service.student;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import com.practifinder.webapp.practifinder.profile.domain.student.persistence.StudentRepository;
@@ -97,5 +98,14 @@ public class StudentServicesImpl implements StudentService {
             throw new EntityNotFoundException("Skills not found for student with ID: " + studentId);
         }
         return skills;
+    }
+
+    @Override
+    public List<Language> getLanguagesByStudentId(Long studentId) {
+        List<Language> languages = studentRepository.findLanguagesByApplicantId(studentId);
+        if (languages == null || languages.isEmpty()) {
+            throw new EntityNotFoundException("Languages not found for student with ID: " + studentId);
+        }
+        return languages;
     }
 }

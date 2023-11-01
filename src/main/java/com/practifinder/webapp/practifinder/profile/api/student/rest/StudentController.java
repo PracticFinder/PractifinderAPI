@@ -1,6 +1,7 @@
 package com.practifinder.webapp.practifinder.profile.api.student.rest;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import com.practifinder.webapp.practifinder.profile.domain.student.service.StudentService;
@@ -58,4 +59,9 @@ public class StudentController {
         return ResponseEntity.ok(skills);
     }
 
+    @GetMapping("/{studentId}/languages")
+    public ResponseEntity<List<Language>> getStudentLanguages(@PathVariable Long studentId) {
+        List<Language> languages = studentService.getLanguagesByStudentId(studentId);
+        return ResponseEntity.ok(languages);
+    }
 }
