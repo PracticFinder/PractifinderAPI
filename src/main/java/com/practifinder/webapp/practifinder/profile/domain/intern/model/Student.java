@@ -1,4 +1,4 @@
-package com.practifinder.webapp.practifinder.profile.domain.intern;
+package com.practifinder.webapp.practifinder.profile.domain.intern.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -30,7 +30,7 @@ public class Student {
     private String email;
 
     @Min(value = 18, message = "La edad debe ser mayor o igual a 0")
-    @Max(value = 80, message = "La edad no puede ser mayor a 120")
+    @Max(value = 80, message = "L   a edad no puede ser mayor a 120")
     private int edad;
 
     @URL
