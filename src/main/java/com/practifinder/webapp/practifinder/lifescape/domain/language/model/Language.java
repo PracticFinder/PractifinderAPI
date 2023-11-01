@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="language")
+@Table(name="Language")
 public class Language extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

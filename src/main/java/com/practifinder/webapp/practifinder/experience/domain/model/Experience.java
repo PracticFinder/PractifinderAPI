@@ -1,10 +1,10 @@
 package com.practifinder.webapp.practifinder.experience.domain.model;
 
+import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @With
 @Entity
-@Table(name="experiences")
+@Table(name="Experience")
 public class Experience {
 
     @Id
@@ -38,9 +38,12 @@ public class Experience {
     private int description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateFinal;
+    private Date fechaFinal;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateInit;
+    private Date fechaInicio;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 }

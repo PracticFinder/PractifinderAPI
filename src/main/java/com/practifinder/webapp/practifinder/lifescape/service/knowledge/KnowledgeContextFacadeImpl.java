@@ -1,6 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.service.knowledge;
 
-import com.practifinder.webapp.practifinder.lifescape.api.knowledge.KnowledgeContextFacade;
+import com.practifinder.webapp.practifinder.lifescape.api.knowledge.internal.KnowledgeContextFacade;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.service.KnowledgeService;
 

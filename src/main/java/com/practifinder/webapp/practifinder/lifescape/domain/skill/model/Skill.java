@@ -28,4 +28,3 @@ public class Skill {
     @Size(max=200)
     private String type;
 }
-

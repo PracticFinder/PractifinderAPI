@@ -1,6 +1,5 @@
 package com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model;
 
-
 import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -37,4 +36,3 @@ public class Knowledge extends AuditModel {
     private Date dateObtained;
 
 }
-
