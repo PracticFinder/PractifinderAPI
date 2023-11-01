@@ -1,6 +1,6 @@
 package com.practifinder.webapp.practifinder.profile.domain.student.model;
 
-import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
+import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,8 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 @With
 @Entity
-@Table(name="StudentLanguage")
-public class StudentLanguage {
+@Table(name="StudentKnowledge")
+public class StudentKnowledge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +21,6 @@ public class StudentLanguage {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "language_id")
-    private Language language;
+    @JoinColumn(name = "knowledge_id")
+    private Knowledge knowledge;
 }

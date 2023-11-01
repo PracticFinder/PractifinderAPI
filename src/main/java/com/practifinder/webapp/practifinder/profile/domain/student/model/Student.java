@@ -60,4 +60,11 @@ public class Student {
     )
     private List<Language> languages;
 
+    @ManyToMany
+    @JoinTable(
+            name = "student_knowledge",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "knowledge_id")
+    )
+    private List<Knowledge> knowledge;
 }
