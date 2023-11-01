@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-
 @Getter
 @Setter
 public class UpdateExperienceResource {
@@ -30,8 +29,10 @@ public class UpdateExperienceResource {
     private int description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateFinal;
+    private Date fechaFinal;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateInit;
+    private Date fechaInicio;
+    private Long studentId;
+
 }

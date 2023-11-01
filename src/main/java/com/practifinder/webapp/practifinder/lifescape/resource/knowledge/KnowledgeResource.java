@@ -15,4 +15,3 @@ public class KnowledgeResource {
     private String nameInstitution;
     private Date dateObtained;
 }
-

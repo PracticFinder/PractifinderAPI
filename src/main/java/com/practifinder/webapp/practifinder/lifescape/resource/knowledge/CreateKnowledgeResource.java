@@ -28,4 +28,3 @@ public class CreateKnowledgeResource {
     @NotBlank
     private Date dateObtained;
 }
-
