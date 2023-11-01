@@ -12,7 +12,6 @@ public class StudentResource {
     private Long id;
     private String name;
     private String  email;
-    private int edad;
-    private String profile_img;
-
+    private int age;
+    private String profileImg;
 }
