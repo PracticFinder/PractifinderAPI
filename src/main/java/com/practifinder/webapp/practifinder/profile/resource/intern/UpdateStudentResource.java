@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.URL;
 @Setter
 
 public class UpdateStudentResource {
-
-
     private Long id;
 
     @NotNull
@@ -27,9 +25,9 @@ public class UpdateStudentResource {
 
     @Min(value = 18)
     @Max(value = 80)
-    private int edad;
+    private int age;
 
     @URL
-    private String profile_img;
+    private String profileImg;
 
 }

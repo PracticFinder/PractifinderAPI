@@ -27,7 +27,7 @@ public class StudentController {
     public Page<StudentResource> getAllStudents(Pageable pageable){
         return mapper.modelListPage(studentService.getAll(), pageable);
     }
-    @GetMapping("{paymentId}")
+    @GetMapping("{studentId}")
     public StudentResource getStudentById(@PathVariable Long paymentId){
         return mapper.toResource(studentService.getById(paymentId));
     }
@@ -35,7 +35,7 @@ public class StudentController {
     public ResponseEntity<StudentResource> createStudent(@RequestBody CreateStudentResource resource){
         return  new ResponseEntity<>(mapper.toResource(studentService.create(mapper.toModel(resource))), HttpStatus.CREATED);
     }
-    @DeleteMapping("{paymentId}")
+    @DeleteMapping("{studentId}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long paymentId){
         return studentService.delete(paymentId);
     }

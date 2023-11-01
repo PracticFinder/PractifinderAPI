@@ -1,5 +1,7 @@
 package com.practifinder.webapp.practifinder.profile.resource.intern;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -10,6 +12,9 @@ import org.hibernate.validator.constraints.URL;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateStudentResource {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     @NotBlank
@@ -23,9 +28,8 @@ public class CreateStudentResource {
 
     @Min(value = 18)
     @Max(value = 80)
-    private int edad;
+    private int age;
 
     @URL
-    private String profile_img;
-
+    private String profileImg;
 }

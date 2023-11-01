@@ -21,7 +21,7 @@ public class StudentServicesImpl implements StudentService {
     private final StudentRepository studentRepository;
 
     public StudentServicesImpl(StudentRepository studentRepository, Validator validator) {
-        this.studentRepository= studentRepository;
+        this.studentRepository = studentRepository;
         this.validator = validator;
     }
 
@@ -32,13 +32,14 @@ public class StudentServicesImpl implements StudentService {
 
     @Override
     public Page<Student> getAll(Pageable pageable) {
+
         return studentRepository.findAll(pageable);
     }
 
     @Override
-    public Student getById(Long paymentId) {
-        return studentRepository.findById(paymentId)
-                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, paymentId));
+    public Student getById(Long studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(()-> new ResourceNotFoundException(ENTITY, studentId));
     }
 
     @Override
@@ -58,8 +59,8 @@ public class StudentServicesImpl implements StudentService {
 
         existingStudent.setName(student.getName());
         existingStudent.setEmail(student.getEmail());
-        existingStudent.setEdad(student.getEdad());
-        existingStudent.setProfile_img(student.getProfile_img());
+        existingStudent.setAge(student.getAge());
+        existingStudent.setProfileImg(student.getProfileImg());
 
         Set<ConstraintViolation<Student>> violations = validator.validate(existingStudent);
         if (!violations.isEmpty()) {
@@ -70,10 +71,10 @@ public class StudentServicesImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<?> delete(Long paymentId) {
-        return studentRepository.findById(paymentId).map(payment ->{
+    public ResponseEntity<?> delete(Long studentId) {
+        return studentRepository.findById(studentId).map(payment ->{
                     studentRepository.delete(payment);
                     return ResponseEntity.ok().build();})
-                .orElseThrow(()->new ResourceNotFoundException(ENTITY,paymentId));
+                .orElseThrow(()->new ResourceNotFoundException(ENTITY,studentId));
     }
 }
