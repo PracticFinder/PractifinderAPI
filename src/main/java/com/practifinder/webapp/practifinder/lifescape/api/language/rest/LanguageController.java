@@ -44,7 +44,7 @@ public class LanguageController {
     }
 
     @DeleteMapping("{languageId}")
-    public ResponseEntity<?> deleteLanguage(@PathVariable Long paymentId){
-        return languageService.delete(paymentId);
+    public ResponseEntity<?> deleteLanguage(@PathVariable Long languageId){
+        return languageService.delete(languageId);
     }
 }
