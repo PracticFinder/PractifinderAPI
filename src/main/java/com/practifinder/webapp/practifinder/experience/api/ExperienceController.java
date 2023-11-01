@@ -4,7 +4,6 @@ import com.practifinder.webapp.practifinder.experience.domain.service.Experience
 import com.practifinder.webapp.practifinder.experience.mapping.ExperienceMapper;
 import com.practifinder.webapp.practifinder.experience.resource.CreateExperienceResource;
 import com.practifinder.webapp.practifinder.experience.resource.ExperienceResource;
-import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

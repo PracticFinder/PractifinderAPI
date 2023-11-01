@@ -1,12 +1,9 @@
 package com.practifinder.webapp.practifinder.experience.mapping;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
-import com.practifinder.webapp.practifinder.experience.domain.service.ExperienceService;
 import com.practifinder.webapp.practifinder.experience.resource.CreateExperienceResource;
 import com.practifinder.webapp.practifinder.experience.resource.ExperienceResource;
 import com.practifinder.webapp.practifinder.experience.resource.UpdateExperienceResource;
-import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
-import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
 import com.practifinder.webapp.shared.mapping.EnhancedModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,10 +1,11 @@
-package com.practifinder.webapp.practifinder.profile.service.intern;
+package com.practifinder.webapp.practifinder.profile.service.student;
 
-import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
-import com.practifinder.webapp.practifinder.profile.domain.intern.persistence.StudentRepository;
-import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
+import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.student.persistence.StudentRepository;
+import com.practifinder.webapp.practifinder.profile.domain.student.service.StudentService;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.data.domain.Page;
@@ -76,5 +77,11 @@ public class StudentServicesImpl implements StudentService {
                     studentRepository.delete(payment);
                     return ResponseEntity.ok().build();})
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,studentId));
+    }
+
+    @Override
+    public Student getApplicantWithExperiences(Long studentId) {
+        return studentRepository.findById(studentId)
+                .orElseThrow(() -> new EntityNotFoundException("Applicant not found with ID: " + studentId));
     }
 }

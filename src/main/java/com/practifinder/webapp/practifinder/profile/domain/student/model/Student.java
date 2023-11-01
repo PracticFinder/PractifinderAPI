@@ -1,10 +1,12 @@
-package com.practifinder.webapp.practifinder.profile.domain.intern.model;
+package com.practifinder.webapp.practifinder.profile.domain.student.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,7 +14,7 @@ import org.hibernate.validator.constraints.URL;
 @NoArgsConstructor
 @With
 @Entity
-@Table(name="Student")
+@Table(name="student")
 public class Student {
 
     @Id
@@ -35,5 +37,8 @@ public class Student {
 
     @URL
     private String profileImg;
+
+    @OneToMany(mappedBy = "student")
+    private List<Experience> experiences;
 
 }
