@@ -1,5 +1,7 @@
 package com.practifinder.webapp.practifinder.profile.domain.student.service;
 
+import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,5 +21,8 @@ public interface StudentService {
     Student update(Long id, Student student);
 
     ResponseEntity<?> delete(Long studentId);
-    Student getApplicantWithExperiences(Long applicantId);
+    List<Experience> getExperiencesByStudentId(Long studentId);
+
+    List<Skill> getSkillsByStudentId(Long studentId);
+
 }
