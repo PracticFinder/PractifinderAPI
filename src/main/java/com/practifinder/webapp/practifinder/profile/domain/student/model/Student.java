@@ -1,6 +1,8 @@
 package com.practifinder.webapp.practifinder.profile.domain.student.model;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
+import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -49,5 +51,13 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "skill_id")
     )
     private List<Skill> skills;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_language",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    private List<Language> languages;
 
 }
