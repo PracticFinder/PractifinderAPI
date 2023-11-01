@@ -1,6 +1,12 @@
 package com.practifinder.webapp.practifinder.experience.resource;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -14,7 +20,8 @@ public class ExperienceResource {
     private String name;
     private String jobPosition;
     private int description;
-    private Date dateFinal;
-    private Date dateInit;
-}
+    private Date fechaFinal;
+    private Date fechaInicio;
+    private Long studentId;
 
+}
