@@ -1,13 +1,10 @@
-package com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model;
+package com.practifinder.webapp.practifinder.lifescape.domain.skill.model;
 
-import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -15,24 +12,19 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Knowledge")
-public class Knowledge extends AuditModel {
+@Table(name = "Skill")
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @NotBlank
-    @Size(max=100)
+    @Size(max=20)
     private String name;
 
     @NotNull
     @NotBlank
-    @Size(max=100)
-    private String nameInstitution;
-
-    @NotNull
-    @NotBlank
-    private Date dateObtained;
-
+    @Size(max=200)
+    private String type;
 }
