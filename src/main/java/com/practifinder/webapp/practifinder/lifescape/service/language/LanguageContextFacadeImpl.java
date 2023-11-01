@@ -1,6 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.service.language;
 
-import com.practifinder.webapp.practifinder.lifescape.api.language.LanguageContextFacade;
+import com.practifinder.webapp.practifinder.lifescape.api.language.internal.LanguageContextFacade;
 import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.language.service.LanguageService;
 

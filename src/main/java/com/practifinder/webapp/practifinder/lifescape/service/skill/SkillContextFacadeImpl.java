@@ -1,6 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.service.skill;
 
-import com.practifinder.webapp.practifinder.lifescape.api.skill.SkillContextFacade;
+import com.practifinder.webapp.practifinder.lifescape.api.skill.internal.SkillContextFacade;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.model.Skill;
 import com.practifinder.webapp.practifinder.lifescape.domain.skill.service.SkillService;
 
