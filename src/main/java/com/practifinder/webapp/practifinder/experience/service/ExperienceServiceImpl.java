@@ -62,8 +62,8 @@ public class ExperienceServiceImpl implements ExperienceService {
         existingExperience.setName(experience.getName());
         existingExperience.setJobPosition(experience.getJobPosition());
         existingExperience.setDescription(experience.getDescription());
-        existingExperience.setFechaFinal(experience.getFechaFinal());
-        existingExperience.setFechaInicio(experience.getFechaInicio());
+        existingExperience.setDateFinal(experience.getDateFinal());
+        existingExperience.setDateInit(experience.getDateInit());
 
         Set<ConstraintViolation<Experience>> violations = validator.validate(existingExperience);
         if (!violations.isEmpty()) {
