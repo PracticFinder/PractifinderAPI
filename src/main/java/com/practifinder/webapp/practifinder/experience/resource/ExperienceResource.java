@@ -22,4 +22,6 @@ public class ExperienceResource {
     private int description;
     private Date fechaFinal;
     private Date fechaInicio;
+    private Long studentId;
+
 }

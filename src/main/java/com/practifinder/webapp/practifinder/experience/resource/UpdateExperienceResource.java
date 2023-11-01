@@ -33,4 +33,6 @@ public class UpdateExperienceResource {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
+    private Long studentId;
+
 }

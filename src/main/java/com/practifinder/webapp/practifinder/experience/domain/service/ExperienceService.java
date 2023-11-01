@@ -1,7 +1,6 @@
 package com.practifinder.webapp.practifinder.experience.domain.service;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
-import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

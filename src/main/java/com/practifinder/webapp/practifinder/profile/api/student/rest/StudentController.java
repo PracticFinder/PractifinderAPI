@@ -1,9 +1,10 @@
-package com.practifinder.webapp.practifinder.profile.api.intern.rest;
+package com.practifinder.webapp.practifinder.profile.api.student.rest;
 
-import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
-import com.practifinder.webapp.practifinder.profile.mapping.intern.StudentMapper;
-import com.practifinder.webapp.practifinder.profile.resource.intern.CreateStudentResource;
-import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
+import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.student.service.StudentService;
+import com.practifinder.webapp.practifinder.profile.mapping.student.StudentMapper;
+import com.practifinder.webapp.practifinder.profile.resource.student.CreateStudentResource;
+import com.practifinder.webapp.practifinder.profile.resource.student.StudentResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,13 @@ public class StudentController {
     @DeleteMapping("{studentId}")
     public ResponseEntity<?> deleteStudent(@PathVariable Long paymentId){
         return studentService.delete(paymentId);
+    }
+
+
+    @GetMapping("/{studentId}")
+    public ResponseEntity<Student> getApplicant(@PathVariable Long studentId) {
+        Student student = studentService.getApplicantWithExperiences(studentId);
+        return ResponseEntity.ok(student);
     }
 
 }

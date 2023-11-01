@@ -1,5 +1,6 @@
 package com.practifinder.webapp.practifinder.experience.domain.model;
 
+import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -42,4 +43,7 @@ public class Experience {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 }

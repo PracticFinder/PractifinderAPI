@@ -40,4 +40,7 @@ public class CreateExperienceResource {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
+
+    private Long studentId;
+
 }
