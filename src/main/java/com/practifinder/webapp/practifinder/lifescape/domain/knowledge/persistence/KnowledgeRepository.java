@@ -3,7 +3,8 @@ package com.practifinder.webapp.practifinder.lifescape.domain.knowledge.persiste
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface KnowledgeRepository extends JpaRepository<Knowledge, Long> {
-    Knowledge findAllBy();
+import java.util.List;
 
+public interface KnowledgeRepository extends JpaRepository<Knowledge, Long> {
+    List<Knowledge> findKnowledgesByStudentId(Long studentId);
 }

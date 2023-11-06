@@ -1,10 +1,12 @@
 package com.practifinder.webapp.practifinder.experience.domain.model;
 
-import com.practifinder.webapp.practifinder.profile.domain.student.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
+import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,8 +17,8 @@ import java.util.Date;
 @NoArgsConstructor
 @With
 @Entity
-@Table(name="Experience")
-public class Experience {
+@Table(name="experiences")
+public class Experience extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,12 +40,10 @@ public class Experience {
     private int description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaFinal;
+    private Date dateFinal;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaInicio;
+    private Date dateInit;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+
 }

@@ -1,5 +1,7 @@
 package com.practifinder.webapp.practifinder.lifescape.resource.knowledge;
 
+import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.util.Date;
@@ -15,3 +17,4 @@ public class KnowledgeResource {
     private String nameInstitution;
     private Date dateObtained;
 }
+

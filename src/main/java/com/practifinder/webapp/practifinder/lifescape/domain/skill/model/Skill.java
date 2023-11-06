@@ -1,6 +1,5 @@
 package com.practifinder.webapp.practifinder.lifescape.domain.skill.model;
 
-import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "Skill")
-public class Skill extends AuditModel {
+public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,3 +28,4 @@ public class Skill extends AuditModel {
     @Size(max=200)
     private String type;
 }
+
