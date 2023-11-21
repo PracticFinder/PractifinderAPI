@@ -255,6 +255,48 @@ public class StudentServiceImpl implements StudentService {
         return student.getIdiomas();
     }
 
+    @Override
+    public Student getByUsername(String username) {
+        Student student = studentRepository.findByUsername(username);
+
+        if (student == null) {
+            throw new ResourceNotFoundException(ENTITY);
+        }
+
+        return student;
+    }
 
 
+    @Override
+    public Student updateByUsername(Student newStudent) {
+        Set<ConstraintViolation<Student>> violations = validator.validate(newStudent);
+
+        if (!violations.isEmpty()) {
+            throw new ResourceValidationException(ENTITY, violations);
+        }
+
+        Student existingStudent = studentRepository.findByUsername(newStudent.getUsername());
+
+        if (existingStudent == null) {
+            throw new ResourceNotFoundException(ENTITY);
+        }
+
+        existingStudent.setNombre(newStudent.getNombre());
+        existingStudent.setCorreo(newStudent.getCorreo());
+        existingStudent.setUsername(newStudent.getUsername());
+        existingStudent.setPassword(newStudent.getPassword());
+        existingStudent.setRolId(newStudent.getRolId());
+        existingStudent.setImagen(newStudent.getImagen());
+        existingStudent.setEdad(newStudent.getEdad());
+        existingStudent.setDireccion(newStudent.getDireccion());
+        existingStudent.setTelefono(newStudent.getTelefono());
+        existingStudent.setHabilidadesInterpersonales(newStudent.getHabilidadesInterpersonales());
+        existingStudent.setHabilidadesTecnicas(newStudent.getHabilidadesTecnicas());
+        existingStudent.setExperiencias(newStudent.getExperiencias());
+        existingStudent.setCertificaciones(newStudent.getCertificaciones());
+        existingStudent.setIdiomas(newStudent.getIdiomas());
+
+
+        return studentRepository.save(existingStudent);
+    }
 }

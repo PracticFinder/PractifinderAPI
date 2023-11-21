@@ -35,9 +35,15 @@ public class StudentController {
         return mapper.modelListPage(studentService.getAll(), pageable);
     }
 
-    @GetMapping("{studentId}")
-    public StudentResource getStudentById(@PathVariable Long studentId){
-        return mapper.toResource(studentService.getById(studentId));
+    @PutMapping
+    public ResponseEntity<StudentResource> updateStudentByUsername(
+            @RequestBody CreateStudentResource resource) {
+        Student updatedStudent = studentService.updateByUsername(mapper.toModel(resource));
+        return new ResponseEntity<>(mapper.toResource(updatedStudent), HttpStatus.OK);
+    }
+    @GetMapping("{username}")
+    public StudentResource getStudentByUsername(@PathVariable String username){
+        return mapper.toResource(studentService.getByUsername(username));
     }
 
     @PostMapping

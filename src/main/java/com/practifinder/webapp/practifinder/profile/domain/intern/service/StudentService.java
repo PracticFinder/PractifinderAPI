@@ -21,13 +21,14 @@ public interface StudentService {
     Student create(Student student);
     Student update(Long id, Student student);
     ResponseEntity<?> delete(Long studentId);
-
+    Student getByUsername(String username);
     List<Experience> getExperiencesByStudentId(Long studentId);
     List<Knowledge> getKnowledgesByStudentId(Long studentId);
     List<Language> getLanguagesByStudentId(Long studentId);
     List<SkillInterpersonal> getSkillsInterpersonalByStudentId(Long studentId);
     List<SkillTechnical> getSkillsTechnicalByStudentId(Long studentId);
     Student createWithMissingAttributes(Long studentId, CreateStudentWithAttributesResource createStudentWithAttributesResource);
+    Student updateByUsername(Student newStudent);
 
     List<Experience> addExperienceToStudent(Long studentId, Experience experience);
 
