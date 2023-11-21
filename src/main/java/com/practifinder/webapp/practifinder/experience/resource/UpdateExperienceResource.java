@@ -1,6 +1,6 @@
 package com.practifinder.webapp.practifinder.experience.resource;
 
-import jakarta.validation.constraints.NotBlank;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -8,31 +8,26 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+
 @Getter
 @Setter
 public class UpdateExperienceResource {
-    private Long id;
 
     @NotNull
-    @NotBlank
     @Size(max = 50)
-    private String name;
+    private String empresa;
 
     @NotNull
-    @NotBlank
     @Size(max = 50)
-    private String jobPosition;
+    private String cargo;
 
     @NotNull
-    @NotBlank
     @Size(max = 250)
-    private int description;
+    private String descripcion;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaFinal;
+    private Date fechaFinalizacion;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
-    private Long studentId;
-
 }

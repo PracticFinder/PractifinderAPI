@@ -10,8 +10,6 @@ import lombok.Setter;
 @Setter
 public class UpdateLanguageResource {
 
-    private Long id;
-
     @NotNull
     @NotBlank
     @Size(max=20)

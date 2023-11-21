@@ -59,10 +59,10 @@ public class ExperienceServiceImpl implements ExperienceService {
         Experience existingExperience = experienceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(ENTITY, id));
 
-        existingExperience.setName(experience.getName());
-        existingExperience.setJobPosition(experience.getJobPosition());
-        existingExperience.setDescription(experience.getDescription());
-        existingExperience.setFechaFinal(experience.getFechaFinal());
+        existingExperience.setEmpresa(experience.getEmpresa());
+        existingExperience.setCargo(experience.getCargo());
+        existingExperience.setDescripcion(experience.getDescripcion());
+        existingExperience.setFechaFinalizacion(experience.getFechaFinalizacion());
         existingExperience.setFechaInicio(experience.getFechaInicio());
 
         Set<ConstraintViolation<Experience>> violations = validator.validate(existingExperience);
@@ -77,5 +77,6 @@ public class ExperienceServiceImpl implements ExperienceService {
         return experienceRepository.findById(experienceId).map(payment ->{
                     experienceRepository.delete(payment);
                     return ResponseEntity.ok().build();})
-                .orElseThrow(()->new ResourceNotFoundException(ENTITY,experienceId));    }
+                .orElseThrow(()->new ResourceNotFoundException(ENTITY,experienceId));
+    }
 }

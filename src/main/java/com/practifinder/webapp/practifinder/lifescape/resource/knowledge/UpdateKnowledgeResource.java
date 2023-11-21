@@ -12,8 +12,6 @@ import java.util.Date;
 @Setter
 public class UpdateKnowledgeResource {
 
-    private Long id;
-
     @NotNull
     @NotBlank
     @Size(max=100)
