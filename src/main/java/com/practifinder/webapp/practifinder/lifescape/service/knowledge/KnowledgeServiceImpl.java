@@ -64,4 +64,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
                     return ResponseEntity.ok().build();})
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,knowledgeId));
     }
+
+    @Override
+    public List<Knowledge> getByStudentId(Long studentId) {
+        return knowledgeRepository.findByStudentId(studentId);
+    }
 }

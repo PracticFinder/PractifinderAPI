@@ -1,5 +1,7 @@
 package com.practifinder.webapp.security.domain.service;
 
+import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import com.practifinder.webapp.security.domain.model.entity.User;
 import com.practifinder.webapp.security.domain.service.communication.AuthenticateRequest;
 import com.practifinder.webapp.security.domain.service.communication.RegisterRequest;
@@ -22,4 +24,9 @@ public interface UserService {
     public RegisterRequest getUserByUsername(String username);
 
     public RegisterRequest getUserByRoleId(Long roleId);
+
+
+    public void registerStudent(RegisterRequest user);
+
+    public void registerBusiness(RegisterRequest user);
 }

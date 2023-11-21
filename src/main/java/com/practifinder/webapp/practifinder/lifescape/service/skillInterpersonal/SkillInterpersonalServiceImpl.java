@@ -65,4 +65,9 @@ public class SkillInterpersonalServiceImpl implements SkillInterpersonalService 
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,skillId));
     }
 
+    @Override
+    public List<SkillInterpersonal> getByStudentId(Long studentId) {
+        return skillInterpersonalRepository.findByStudentId(studentId);
+    }
+
 }

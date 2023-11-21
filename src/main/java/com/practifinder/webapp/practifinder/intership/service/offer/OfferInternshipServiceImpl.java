@@ -4,6 +4,8 @@ package com.practifinder.webapp.practifinder.intership.service.offer;
 import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
 import com.practifinder.webapp.practifinder.intership.domain.offer.persistence.OfferInternshipRepository;
 import com.practifinder.webapp.practifinder.intership.domain.offer.service.OfferInternshipService;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
 import jakarta.validation.ConstraintViolation;
@@ -21,10 +23,14 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
     private static final String ENTITY = "OfferInternship";
     private final OfferInternshipRepository offerInternshipRepository;
 
+    private final StudentService studentService;
+
     private final Validator validator;
 
-    public OfferInternshipServiceImpl(OfferInternshipRepository offerInternshipRepository, Validator validator){
+    public OfferInternshipServiceImpl(OfferInternshipRepository offerInternshipRepository, Validator validator
+            , StudentService studentService){
         this.offerInternshipRepository = offerInternshipRepository;
+        this.studentService = studentService;
         this.validator = validator;
     }
 
@@ -93,6 +99,33 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
                     return ResponseEntity.ok().build();
                 }).orElseThrow(()-> new ResourceNotFoundException(ENTITY, offerInternshipId));
     }
+
+    @Override
+    public List<Student> getPostulantes(Long offerInternshipId) {
+        OfferInternship offer = getById(offerInternshipId);
+        return offer.getPostulantes();
+    }
+
+    @Override
+    public void postular(Long offerInternshipId, Long studentId) {
+        OfferInternship offer = getById(offerInternshipId);
+        Student student = studentService.getById(studentId);
+
+        if (!offer.getPostulantes().contains(student)) {
+            offer.getPostulantes().add(student);
+            offerInternshipRepository.save(offer);
+        }
+    }
+
+    @Override
+    public void retirarPostulacion(Long offerInternshipId, Long studentId) {
+        OfferInternship offer = getById(offerInternshipId);
+        Student student = studentService.getById(studentId);
+
+        offer.getPostulantes().remove(student);
+        offerInternshipRepository.save(offer);
+    }
+
 
 
 }

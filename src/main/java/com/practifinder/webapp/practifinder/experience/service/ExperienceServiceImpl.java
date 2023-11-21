@@ -79,4 +79,9 @@ public class ExperienceServiceImpl implements ExperienceService {
                     return ResponseEntity.ok().build();})
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,experienceId));
     }
+
+    @Override
+    public List<Experience> getByStudentId(Long studentId) {
+        return experienceRepository.findByStudentId(studentId);
+    }
 }

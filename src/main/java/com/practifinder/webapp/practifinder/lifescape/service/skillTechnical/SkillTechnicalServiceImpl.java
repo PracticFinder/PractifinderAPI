@@ -69,4 +69,9 @@ public class SkillTechnicalServiceImpl implements SkillTechnicalService {
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,skillId));
     }
 
+    @Override
+    public List<SkillTechnical> getByStudentId(Long studentId) {
+        return skillTechnicalRepository.findByStudentId(studentId);
+    }
+
 }

@@ -1,5 +1,9 @@
 package com.practifinder.webapp.security.service;
 
+import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
+import com.practifinder.webapp.practifinder.profile.domain.business.persistence.BusinessRepository;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.intern.persistence.StudentRepository;
 import com.practifinder.webapp.security.domain.model.entity.Role;
 import com.practifinder.webapp.security.domain.model.entity.User;
 import com.practifinder.webapp.security.domain.persistence.RoleRepository;
@@ -23,6 +27,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private BusinessRepository businessRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -134,6 +144,44 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         registerRequest.setPassword(user.getPassword());
 
         return registerRequest;
+    }
+
+    @Override
+    public void registerStudent(RegisterRequest user) {
+
+        Student student = new Student();
+
+        student.setNombre(user.getName());
+
+        student.setRolId(user.getRolId());
+
+        student.setUsername(user.getUsername());
+
+        student.setCorreo(user.getEmail());
+
+        student.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        studentRepository.save(student);
+
+    }
+
+    @Override
+    public void registerBusiness(RegisterRequest user) {
+
+        Business business = new Business();
+
+        business.setNombre(user.getName());
+
+        business.setRolId(user.getRolId());
+
+        business.setUsername(user.getUsername());
+
+        business.setCorreo(user.getEmail());
+
+        business.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        businessRepository.save(business);
+
     }
 
 }

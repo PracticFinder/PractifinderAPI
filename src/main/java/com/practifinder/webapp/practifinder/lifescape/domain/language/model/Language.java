@@ -1,5 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.domain.language.model;
 
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -31,6 +32,7 @@ public class Language extends AuditModel {
     @Column(name = "idioma", unique = true)
     private String idioma;
 
-    @NotNull
-    private Long studentId;
+    @ManyToOne
+    @JoinColumn(name = "student_id") // specify the foreign key column name
+    private Student student;
 }

@@ -1,5 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model;
 
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +24,10 @@ public class SkillInterpersonal {
     @Size(max=20)
     @Column(name = "nombre", unique = true)
     private String nombre;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id") // specify the foreign key column name
+    private Student student;
 
 
 }

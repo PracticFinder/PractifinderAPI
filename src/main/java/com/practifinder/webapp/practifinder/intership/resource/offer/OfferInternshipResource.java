@@ -1,7 +1,12 @@
 package com.practifinder.webapp.practifinder.intership.resource.offer;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
 public class OfferInternshipResource {
 
     private Long id;

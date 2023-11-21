@@ -28,25 +28,23 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @NotNull
     @Size(max = 100)
     private String name;
 
-    @NotBlank
+
     @NotNull
     @Size(max = 50)
     @Column(unique = true)
     private String username;
 
     @NotNull
-    @NotBlank
     @Size(max = 50)
     @Column(unique = true)
     @Email
     private String correo;
 
-    @NotBlank
+    @NotNull
     @Size(max = 120)
     private String password;
 

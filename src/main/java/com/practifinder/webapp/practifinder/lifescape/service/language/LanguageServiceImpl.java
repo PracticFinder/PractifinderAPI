@@ -65,5 +65,10 @@ public class LanguageServiceImpl implements LanguageService {
                 .orElseThrow(()->new ResourceNotFoundException(ENTITY,languageId));
     }
 
+    @Override
+    public List<Language> getByStudentId(Long studentId) {
+        return languageRepository.findByStudentId(studentId);
+    }
+
 
 }

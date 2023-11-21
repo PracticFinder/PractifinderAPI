@@ -13,8 +13,5 @@ public class RegisterRequest {
     String username;
     String password;
     String lastname;
-    int tdonacion;
     int idRoles;
-    String DonacionU;
-
 }

@@ -50,5 +50,7 @@ public class Experience {
     @Column(name = "fechaInicio")
     private Date fechaInicio;
 
-
+    @ManyToOne
+    @JoinColumn(name = "student_id") // specify the foreign key column name
+    private Student student;
 }

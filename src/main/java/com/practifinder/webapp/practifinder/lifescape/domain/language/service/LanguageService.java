@@ -17,4 +17,6 @@ public interface LanguageService {
     Language create(Language language);
     Language update(Long id, Language language);
     ResponseEntity<?> delete(Long languageId);
+
+    List<Language> getByStudentId(Long studentId);
 }

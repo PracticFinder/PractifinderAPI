@@ -16,4 +16,6 @@ public interface SkillInterpersonalService {
     SkillInterpersonal create(SkillInterpersonal skillInterpersonal);
     SkillInterpersonal update(Long id, SkillInterpersonal skillInterpersonal);
     ResponseEntity<?> delete(Long skillId);
+
+    List<SkillInterpersonal> getByStudentId(Long studentId);
 }

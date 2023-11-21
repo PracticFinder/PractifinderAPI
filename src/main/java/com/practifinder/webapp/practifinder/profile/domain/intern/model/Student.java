@@ -1,10 +1,19 @@
 package com.practifinder.webapp.practifinder.profile.domain.intern.model;
 
 
+import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
+import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
+import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
+import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
+import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
+
+import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -39,7 +48,7 @@ public class Student {
 
     @NotNull
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 120)
     @Column(name = "password")
     private String password;
 
@@ -53,8 +62,7 @@ public class Student {
     @URL
     private String imagen;
 
-    @Min(value = 18, message = "La edad debe ser mayor o igual a 0")
-    @Max(value = 80, message = "La edad no puede ser mayor a 120")
+
     @Column(name = "edad")
     private int edad;
 
@@ -67,6 +75,28 @@ public class Student {
     @Size(max=12)
     @Column(name = "telefono")
     private String telefono;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<OfferInternship> postulaciones;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<SkillInterpersonal> habilidadesInterpersonales;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<SkillTechnical> habilidadesTecnicas;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<Experience> experiencias;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<Knowledge> certificaciones;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<Language> idiomas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "offer_id")
+    private OfferInternship offer;
 
 
 }

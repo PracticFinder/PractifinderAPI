@@ -17,5 +17,7 @@ public interface SkillTechnicalService {
     SkillTechnical create(SkillTechnical skillTechnical);
     SkillTechnical update(Long id, SkillTechnical skillTechnical);
     ResponseEntity<?> delete(Long skillId);
+
+    List<SkillTechnical> getByStudentId(Long studentId);
 }
 

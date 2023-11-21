@@ -1,6 +1,8 @@
 package com.practifinder.webapp.practifinder.profile.domain.business.service;
 
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
 import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
+import com.practifinder.webapp.practifinder.profile.resource.business.CreateBusinessWithAttributesResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +21,11 @@ public interface BusinessService {
 
     ResponseEntity<?> delete(Long businessId);
 
+    List<Business> getAllBusinesses();
 
+    Business getBusinessById(Long businessId);
+
+    OfferInternship addOfferToBusiness(Long businessId, OfferInternship offer);
+
+    Business createWithMissingAttributes(Long businessId, CreateBusinessWithAttributesResource createStudentWithAttributesResource);
 }

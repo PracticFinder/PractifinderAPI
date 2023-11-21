@@ -17,4 +17,6 @@ public interface KnowledgeService {
     Knowledge create(Knowledge knowledge);
     Knowledge update(Long id ,Knowledge knowledge);
     ResponseEntity<?> delete(Long knowledgeId);
+
+    List<Knowledge> getByStudentId(Long studentId);
 }

@@ -1,10 +1,13 @@
 package com.practifinder.webapp.practifinder.profile.service.business;
 
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
 import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
 import com.practifinder.webapp.practifinder.profile.domain.business.persistence.BusinessRepository;
 import com.practifinder.webapp.practifinder.profile.domain.business.service.BusinessService;
+import com.practifinder.webapp.practifinder.profile.resource.business.CreateBusinessWithAttributesResource;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import org.springframework.data.domain.Page;
@@ -75,7 +78,6 @@ public class BusinessServiceImpl implements BusinessService {
         businessToUpdate.setNombre(business.getNombre());
         businessToUpdate.setUsername(business.getUsername());
         businessToUpdate.setCorreo(business.getCorreo());
-        businessToUpdate.setLocation(business.getLocation());
         businessToUpdate.setSiteWeb(business.getSiteWeb());
 
         return businessRepository.save(businessToUpdate);
@@ -87,6 +89,39 @@ public class BusinessServiceImpl implements BusinessService {
             businessRepository.delete(business);
             return ResponseEntity.ok().build();
         }).orElseThrow(()->new ResourceNotFoundException(ENTITY,businessId));
+    }
+
+    @Override
+    public List<Business> getAllBusinesses() {
+        return businessRepository.findAll();
+    }
+
+    @Override
+    public Business getBusinessById(Long businessId) {
+        return businessRepository.findById(businessId)
+                .orElseThrow(() -> new EntityNotFoundException("Business not found with id: " + businessId));
+    }
+
+    @Override
+    public OfferInternship addOfferToBusiness(Long businessId, OfferInternship offer) {
+        Business business = getBusinessById(businessId);
+        offer.setBusiness(business);
+        business.getOfertas().add(offer);
+        businessRepository.save(business);
+        return offer;
+    }
+
+    @Override
+    public Business createWithMissingAttributes(Long businessId, CreateBusinessWithAttributesResource createBusinessWithAttributesResource) {
+
+        Business existingBusiness = businessRepository.findById(businessId)
+                .orElseThrow(() -> new EntityNotFoundException("Business not found with id: " + businessId));
+
+        existingBusiness.setImagen(createBusinessWithAttributesResource.getImagen());
+        existingBusiness.setLocations(createBusinessWithAttributesResource.getLocations());
+        existingBusiness.setSiteWeb(createBusinessWithAttributesResource.getSiteWeb());
+
+        return businessRepository.save(existingBusiness);
     }
 
 }

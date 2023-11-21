@@ -1,6 +1,9 @@
 package com.practifinder.webapp.security.api;
 
+import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import com.practifinder.webapp.security.domain.model.entity.Role;
+import com.practifinder.webapp.security.domain.model.entity.User;
 import com.practifinder.webapp.security.domain.service.RoleService;
 import com.practifinder.webapp.security.domain.service.UserService;
 import com.practifinder.webapp.security.domain.service.communication.RegisterRequest;
@@ -42,7 +45,25 @@ public class UsuarioController {
 
     @PostMapping("/Registrar")
     public void registrar(@RequestBody RegisterRequest registerRequest){
+        Long rolId = registerRequest.getRolId();
+        if (rolId.equals(1L)) {
+            userService.registerStudent(registerRequest);
+        } else if (rolId.equals(2L)) {
+            userService.registerBusiness(registerRequest);
+        } else {
+            throw new IllegalArgumentException("RolId no válido: " + rolId);
+        }
         userService.register(registerRequest);
+    }
+
+    @PostMapping("/RegistrarStudent")
+    public void registrarStudent(@RequestBody RegisterRequest user){
+        userService.registerStudent(user);
+    }
+
+    @PostMapping("/RegistrarBusiness")
+    public void registrarBusiness(@RequestBody RegisterRequest business){
+        userService.registerBusiness(business);
     }
 
 

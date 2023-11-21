@@ -3,6 +3,8 @@ package com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal
 import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SkillInterpersonalRepository extends JpaRepository<SkillInterpersonal, Long> {
+import java.util.List;
 
+public interface SkillInterpersonalRepository extends JpaRepository<SkillInterpersonal, Long> {
+    List<SkillInterpersonal> findByStudentId(Long studentId);
 }

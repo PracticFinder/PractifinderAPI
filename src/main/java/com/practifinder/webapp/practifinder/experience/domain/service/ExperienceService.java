@@ -14,4 +14,6 @@ public interface ExperienceService {
     Experience create(Experience experience);
     Experience update(Long id, Experience experience);
     ResponseEntity<?> delete(Long experienceId);
+
+    List<Experience> getByStudentId(Long studentId);
 }
