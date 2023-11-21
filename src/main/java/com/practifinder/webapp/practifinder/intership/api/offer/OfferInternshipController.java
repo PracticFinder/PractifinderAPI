@@ -51,9 +51,9 @@ public class OfferInternshipController {
     }
 
     @PostMapping("/{offerId}/postular/{studentId}")
-    public ResponseEntity<Void> postular(@PathVariable Long offerId, @PathVariable Long studentId) {
+    public ResponseEntity<String> postular(@PathVariable Long offerId, @PathVariable Long studentId) {
         offerInternshipService.postular(offerId, studentId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Student with ID " + studentId + " applied successfully to offer with ID " + offerId);
     }
 
     @DeleteMapping("/{offerId}/retirarPostulacion/{studentId}")

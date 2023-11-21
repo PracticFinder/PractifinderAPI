@@ -1,6 +1,15 @@
 package com.practifinder.webapp.practifinder.profile.resource.business;
 
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
+import lombok.*;
 
+import java.util.List;
+
+@Getter
+@Setter
+@With
+@NoArgsConstructor
+@AllArgsConstructor
 public class BusinessResource {
     private Long id;
     private String nombre;
@@ -19,4 +28,6 @@ public class BusinessResource {
 
 
     private String siteWeb;
+
+    private List<OfferInternship> ofertas;
 }

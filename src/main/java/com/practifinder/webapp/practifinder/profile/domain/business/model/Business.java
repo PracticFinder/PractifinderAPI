@@ -68,7 +68,7 @@ public class Business {
     @Column(name = "siteWeb")
     private String siteWeb;
 
-    @OneToMany(mappedBy = "business", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "business")
     private List<OfferInternship> ofertas;
 
 

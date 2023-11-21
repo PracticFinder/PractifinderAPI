@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface BusinessRepository extends JpaRepository<Business,Long> {
 
     Business findFirstByCorreo(String email);
+    Business findByUsername(String username);
 
 }

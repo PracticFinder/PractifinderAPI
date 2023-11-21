@@ -101,8 +101,8 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
     }
 
     @Override
-    public List<Student> getPostulantes(Long offerInternshipId) {
-        OfferInternship offer = getById(offerInternshipId);
+    public List<Student> getPostulantes(Long offerId) {
+        OfferInternship offer = offerInternshipRepository.findByIdWithPostulantes(offerId);
         return offer.getPostulantes();
     }
 

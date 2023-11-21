@@ -38,12 +38,10 @@ public class OfferInternship {
     private String descripcion;
 
     @NotNull
-    @NotBlank
     @Column(name = "fecha_inicio")
     private Date fechaInicio;
 
     @NotNull
-    @NotBlank
     @Column(name = "fecha_fin")
     private Date fechaFin;
 
@@ -83,11 +81,10 @@ public class OfferInternship {
     private String ubicacion;
 
     @NotNull
-    @NotBlank
     @Column(name = "salario")
     private Double salario;
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "offer")
     private List<Student> postulantes;
 
     @ManyToOne

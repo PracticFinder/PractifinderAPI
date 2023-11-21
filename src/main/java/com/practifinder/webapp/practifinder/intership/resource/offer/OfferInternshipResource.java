@@ -1,12 +1,16 @@
 package com.practifinder.webapp.practifinder.intership.resource.offer;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
+@With
+@NoArgsConstructor
+@AllArgsConstructor
 public class OfferInternshipResource {
 
     private Long id;
@@ -32,4 +36,6 @@ public class OfferInternshipResource {
     private String ubicacion;
 
     private Double salario;
+
+    private List<Student> postulantes;
 }
