@@ -2,7 +2,7 @@ package com.practifinder.webapp.practifinder.profile.domain.intern.model;
 
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
-import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternshipStudent;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
@@ -13,7 +13,6 @@ import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
-import java.util.Set;
 
 
 @Getter
@@ -77,9 +76,6 @@ public class Student {
     private String telefono;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
-    private List<OfferInternship> postulaciones;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private List<SkillInterpersonal> habilidadesInterpersonales;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
@@ -94,9 +90,6 @@ public class Student {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private List<Language> idiomas;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "offer_id")
-    private OfferInternship offer;
-
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
+    private List<OfferInternshipStudent> postulaciones;
 }

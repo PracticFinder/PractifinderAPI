@@ -1,7 +1,6 @@
 package com.practifinder.webapp.practifinder.experience.domain.model;
 
 import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
-import com.practifinder.webapp.shared.domain.model.AuditModel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,6 +50,6 @@ public class Experience {
     private Date fechaInicio;
 
     @ManyToOne
-    @JoinColumn(name = "student_id") // specify the foreign key column name
+    @JoinColumn(name = "student_id")
     private Student student;
 }

@@ -25,4 +25,7 @@ public class UpdateKnowledgeResource {
     @NotNull
     @NotBlank
     private Date dateObtained;
+
+    @NotNull
+    private Long studentId;
 }

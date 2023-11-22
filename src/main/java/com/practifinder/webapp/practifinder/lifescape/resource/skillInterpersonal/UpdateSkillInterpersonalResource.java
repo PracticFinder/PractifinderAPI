@@ -14,4 +14,7 @@ public class UpdateSkillInterpersonalResource {
     @Size(max=20)
     private String name;
 
+    @NotNull
+    private Long studentId;
+
 }

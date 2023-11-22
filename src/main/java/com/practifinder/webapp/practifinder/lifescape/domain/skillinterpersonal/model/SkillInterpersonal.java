@@ -26,7 +26,7 @@ public class SkillInterpersonal {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "student_id") // specify the foreign key column name
+    @JoinColumn(name = "student_id")
     private Student student;
 
 

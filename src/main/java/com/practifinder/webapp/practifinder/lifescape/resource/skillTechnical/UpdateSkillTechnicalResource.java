@@ -13,4 +13,7 @@ public class UpdateSkillTechnicalResource {
     @NotBlank
     @Size(max=20)
     private String name;
+
+    @NotNull
+    private Long studentId;
 }

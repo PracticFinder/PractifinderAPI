@@ -19,4 +19,7 @@ public class UpdateLanguageResource {
     @NotBlank
     @Size(max=200)
     private String description;
+
+    @NotNull
+    private Long studentId;
 }

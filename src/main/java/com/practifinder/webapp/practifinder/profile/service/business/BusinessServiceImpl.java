@@ -61,6 +61,9 @@ public class BusinessServiceImpl implements BusinessService {
             throw new ResourceValidationException(ENTITY,"The email is already in use.");
         }
 
+        if(business.getImagen() == null)
+            business.setImagen("https://i.ibb.co/7tBZVw7/Logo-Practifinder.png");
+
         return businessRepository.save(business);
     }
 
@@ -79,6 +82,9 @@ public class BusinessServiceImpl implements BusinessService {
         businessToUpdate.setUsername(business.getUsername());
         businessToUpdate.setCorreo(business.getCorreo());
         businessToUpdate.setSiteWeb(business.getSiteWeb());
+
+        if(business.getImagen() == null)
+            business.setImagen("https://i.ibb.co/7tBZVw7/Logo-Practifinder.png");
 
         return businessRepository.save(businessToUpdate);
     }
@@ -118,8 +124,11 @@ public class BusinessServiceImpl implements BusinessService {
                 .orElseThrow(() -> new EntityNotFoundException("Business not found with id: " + businessId));
 
         existingBusiness.setImagen(createBusinessWithAttributesResource.getImagen());
-        existingBusiness.setLocations(createBusinessWithAttributesResource.getLocations());
+        existingBusiness.setLocation(createBusinessWithAttributesResource.getLocation());
         existingBusiness.setSiteWeb(createBusinessWithAttributesResource.getSiteWeb());
+
+        if(existingBusiness.getImagen() == null)
+            existingBusiness.setImagen("https://i.ibb.co/7tBZVw7/Logo-Practifinder.png");
 
         return businessRepository.save(existingBusiness);
     }

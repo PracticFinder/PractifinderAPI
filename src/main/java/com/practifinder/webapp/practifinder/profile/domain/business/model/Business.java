@@ -53,10 +53,8 @@ public class Business {
     private Long rolId;
 
 
-    @ElementCollection
-    @CollectionTable(name = "empresa_locations", joinColumns = @JoinColumn(name = "empresa_id"))
     @Column(name = "location")
-    private List<String> locations;
+    private String location;
 
 
     @Column(name = "imagen")

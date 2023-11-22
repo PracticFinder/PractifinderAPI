@@ -4,8 +4,13 @@ package com.practifinder.webapp.practifinder.intership.service.offer;
 import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
 import com.practifinder.webapp.practifinder.intership.domain.offer.persistence.OfferInternshipRepository;
 import com.practifinder.webapp.practifinder.intership.domain.offer.service.OfferInternshipService;
+import com.practifinder.webapp.practifinder.intership.resource.offer.CreateOfferInternshipResource;
+import com.practifinder.webapp.practifinder.intership.resource.offer.OfferInternshipResource;
+import com.practifinder.webapp.practifinder.intership.resource.offer.UpdateOfferInternshipResource;
+import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
+import com.practifinder.webapp.practifinder.profile.domain.business.service.BusinessService;
 import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
-import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
+import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
 import jakarta.validation.ConstraintViolation;
@@ -17,21 +22,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferInternshipServiceImpl implements OfferInternshipService {
     private static final String ENTITY = "OfferInternship";
     private final OfferInternshipRepository offerInternshipRepository;
 
-    private final StudentService studentService;
+    private final BusinessService businessService;
 
     private final Validator validator;
 
     public OfferInternshipServiceImpl(OfferInternshipRepository offerInternshipRepository, Validator validator
-            , StudentService studentService){
+    , BusinessService businessService){
         this.offerInternshipRepository = offerInternshipRepository;
-        this.studentService = studentService;
         this.validator = validator;
+        this.businessService = businessService;
     }
 
     @Override
@@ -49,9 +55,10 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
         return offerInternshipRepository.findById(offerInternshipId).orElseThrow(()-> new ResourceNotFoundException(ENTITY, offerInternshipId));
     }
 
+
     @Override
-    public OfferInternship create(OfferInternship offerInternship) {
-        Set<ConstraintViolation<OfferInternship>> violations = validator.validate(offerInternship);
+    public OfferInternship create(CreateOfferInternshipResource offerInternship) {
+        Set<ConstraintViolation<CreateOfferInternshipResource>> violations = validator.validate(offerInternship);
         if (!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
         OfferInternship offerInternshipWithTitle = offerInternshipRepository.findByTitulo(offerInternship.getTitulo());
@@ -59,7 +66,23 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
         if (offerInternshipWithTitle != null)
             throw new ResourceValidationException(ENTITY, "title already exists");
 
-        return offerInternshipRepository.save(offerInternship);
+        Business business = businessService.getById(offerInternship.getBusinessId());
+
+        OfferInternship offerInternshipToCreate = new OfferInternship();
+
+        offerInternshipToCreate.setTitulo(offerInternship.getTitulo());
+        offerInternshipToCreate.setDescripcion(offerInternship.getDescripcion());
+        offerInternshipToCreate.setFechaInicio(offerInternship.getFechaInicio());
+        offerInternshipToCreate.setFechaFin(offerInternship.getFechaFin());
+        offerInternshipToCreate.setRequisitos(offerInternship.getRequisitos());
+        offerInternshipToCreate.setFunciones(offerInternship.getFunciones());
+        offerInternshipToCreate.setBeneficios(offerInternship.getBeneficios());
+        offerInternshipToCreate.setMore(offerInternship.getMore());
+        offerInternshipToCreate.setArea(offerInternship.getArea());
+        offerInternshipToCreate.setUbicacion(offerInternship.getUbicacion());
+        offerInternshipToCreate.setSalario(offerInternship.getSalario());
+        offerInternshipToCreate.setBusiness(business);
+        return offerInternshipRepository.save(offerInternshipToCreate);
     }
 
     @Override
@@ -76,6 +99,7 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
 
         return offerInternshipRepository.findById(offerInternshipId)
                 .map(offerInternshipToUpdate -> {
+                    offerInternshipToUpdate.setId(offerInternship.getId());
                     offerInternshipToUpdate.setTitulo(offerInternship.getTitulo());
                     offerInternshipToUpdate.setDescripcion(offerInternship.getDescripcion());
                     offerInternshipToUpdate.setFechaInicio(offerInternship.getFechaInicio());
@@ -87,6 +111,8 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
                     offerInternshipToUpdate.setArea(offerInternship.getArea());
                     offerInternshipToUpdate.setUbicacion(offerInternship.getUbicacion());
                     offerInternshipToUpdate.setSalario(offerInternship.getSalario());
+                    offerInternshipToUpdate.setBusiness(offerInternship.getBusiness());
+                    offerInternshipToUpdate.setPostulantes(offerInternship.getPostulantes());
                     return offerInternshipRepository.save(offerInternshipToUpdate);
                 }).orElseThrow(()-> new ResourceNotFoundException(ENTITY, offerInternshipId));
     }
@@ -101,29 +127,29 @@ public class OfferInternshipServiceImpl implements OfferInternshipService {
     }
 
     @Override
-    public List<Student> getPostulantes(Long offerId) {
-        OfferInternship offer = offerInternshipRepository.findByIdWithPostulantes(offerId);
-        return offer.getPostulantes();
+    public List<StudentResource> getPostulantesByOfferId(Long offerId) {
+        OfferInternship offer = offerInternshipRepository.findById(offerId)
+                .orElseThrow(() -> new ResourceNotFoundException("OfferInternship", offerId));
+
+        List<StudentResource> postulantes = offer.getPostulantes().stream()
+                .map(offerIntershipStudent -> mapStudentToResource(offerIntershipStudent.getStudent()))
+                .collect(Collectors.toList());
+
+        return postulantes;
     }
 
-    @Override
-    public void postular(Long offerInternshipId, Long studentId) {
-        OfferInternship offer = getById(offerInternshipId);
-        Student student = studentService.getById(studentId);
+    // Método para mapear Student a StudentResource
+    private StudentResource mapStudentToResource(Student student) {
+        // Lógica de mapeo, puedes usar un Mapper o hacerlo manualmente
+        // ...
 
-        if (!offer.getPostulantes().contains(student)) {
-            offer.getPostulantes().add(student);
-            offerInternshipRepository.save(offer);
-        }
-    }
+        // Ejemplo manual, ajusta según tus necesidades
+        StudentResource studentResource = new StudentResource();
+        studentResource.setId(student.getId());
+        studentResource.setNombre(student.getNombre());
+        // Mapea otros campos...
 
-    @Override
-    public void retirarPostulacion(Long offerInternshipId, Long studentId) {
-        OfferInternship offer = getById(offerInternshipId);
-        Student student = studentService.getById(studentId);
-
-        offer.getPostulantes().remove(student);
-        offerInternshipRepository.save(offer);
+        return studentResource;
     }
 
 

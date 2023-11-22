@@ -15,7 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name="language")
-public class Language extends AuditModel {
+public class Language{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,6 +33,6 @@ public class Language extends AuditModel {
     private String idioma;
 
     @ManyToOne
-    @JoinColumn(name = "student_id") // specify the foreign key column name
+    @JoinColumn(name = "student_id")
     private Student student;
 }

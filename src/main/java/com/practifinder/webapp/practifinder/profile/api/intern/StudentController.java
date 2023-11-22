@@ -1,6 +1,10 @@
 package com.practifinder.webapp.practifinder.profile.api.intern;
 
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
+import com.practifinder.webapp.practifinder.intership.domain.offer.model.OfferInternship;
+import com.practifinder.webapp.practifinder.intership.domain.offer.service.OfferInternshipStudentService;
+import com.practifinder.webapp.practifinder.intership.mapping.offer.OfferIntershipStudentMapper;
+import com.practifinder.webapp.practifinder.intership.resource.offer.OfferInternshipResource;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import com.practifinder.webapp.practifinder.lifescape.domain.language.model.Language;
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
@@ -18,32 +22,39 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth/students")
 public class StudentController {
     private final StudentService studentService;
+    private final OfferInternshipStudentService offerInternshipStudentService;
     private final StudentMapper mapper;
 
-    public StudentController(StudentService studentService, StudentMapper mapper) {
+    private final OfferInternshipStudentService offerInternshipService;
+
+    private final OfferIntershipStudentMapper offerIntershipStudentMapper;
+
+    public StudentController(StudentService studentService, StudentMapper mapper,
+                             OfferInternshipStudentService offerInternshipStudentService,
+                             OfferIntershipStudentMapper offerInternshipStudentMapper,
+                             OfferInternshipStudentService offerInternshipService) {
         this.studentService = studentService;
         this.mapper = mapper;
+        this.offerInternshipStudentService = offerInternshipStudentService;
+        this.offerIntershipStudentMapper = offerInternshipStudentMapper;
+        this.offerInternshipService = offerInternshipService;
     }
 
     @GetMapping
     public Page<StudentResource> getAllStudents(Pageable pageable){
+
         return mapper.modelListPage(studentService.getAll(), pageable);
     }
 
-    @PutMapping
-    public ResponseEntity<StudentResource> updateStudentByUsername(
-            @RequestBody CreateStudentResource resource) {
-        Student updatedStudent = studentService.updateByUsername(mapper.toModel(resource));
-        return new ResponseEntity<>(mapper.toResource(updatedStudent), HttpStatus.OK);
-    }
-    @GetMapping("{username}")
-    public StudentResource getStudentByUsername(@PathVariable String username){
-        return mapper.toResource(studentService.getByUsername(username));
+    @GetMapping("{studentId}")
+    public StudentResource getStudentById(@PathVariable Long studentId){
+        return mapper.toResource(studentService.getById(studentId));
     }
 
     @PostMapping
@@ -93,6 +104,7 @@ public class StudentController {
         return ResponseEntity.ok(skillInterpersonals);
     }
 
+
     @PostMapping("/{studentId}/skills_technicals")
     public ResponseEntity<List<SkillTechnical>> addSkillTechnicalToStudent(
             @PathVariable Long studentId,
@@ -135,4 +147,28 @@ public class StudentController {
         return ResponseEntity.ok(knowledges);
     }
 
+    @GetMapping("/{studentId}/postulaciones")
+    public ResponseEntity<List<OfferInternship>> getPostulaciones(@PathVariable Long studentId) {
+        List<OfferInternship> postulaciones = offerInternshipStudentService.getPostulaciones(studentId);
+        return ResponseEntity.ok(postulaciones);
+    }
+
+    @GetMapping("/profiles/{studentId}/offers")
+    public ResponseEntity<List<OfferInternshipResource>> getStudentOffers(@PathVariable Long studentId) {
+        List<OfferInternship> offers = offerInternshipService.getPostulaciones(studentId);
+
+        List<OfferInternshipResource> offerResources = offers.stream()
+                .map(offerIntershipStudentMapper::toResource)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(offerResources);
+    }
+
+    @GetMapping("/users_offers")
+    public ResponseEntity<List<StudentResource>> getStudentOffers() {
+        List<StudentResource> studentOffers = studentService.getAllStudentOffers();
+        return ResponseEntity.ok(studentOffers);
+    }
+
 }
+

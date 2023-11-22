@@ -53,4 +53,7 @@ public class CreateOfferInternshipResource {
     @NotNull
     private Double salario;
 
+    @NotNull
+    private Long businessId;
+
 }

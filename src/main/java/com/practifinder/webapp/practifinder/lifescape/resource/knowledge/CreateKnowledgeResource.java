@@ -27,5 +27,8 @@ public class CreateKnowledgeResource {
     @NotNull
     @NotBlank
     private Date dateObtained;
+
+    @NotNull
+    private Long studentId;
 }
 

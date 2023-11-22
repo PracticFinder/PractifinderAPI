@@ -3,6 +3,7 @@ package com.practifinder.webapp.practifinder.lifescape.service.knowledge;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.model.Knowledge;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.persistence.KnowledgeRepository;
 import com.practifinder.webapp.practifinder.lifescape.domain.knowledge.service.KnowledgeService;
+import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
 import jakarta.validation.ConstraintViolation;
@@ -19,11 +20,15 @@ import java.util.Set;
 public class KnowledgeServiceImpl implements KnowledgeService {
     private static final String ENTITY = "Knowledge";
     private final KnowledgeRepository knowledgeRepository;
+
+    private final StudentService studentService;
     private final Validator validator;
 
-    public KnowledgeServiceImpl(KnowledgeRepository knowledgeRepository, Validator validator){
+    public KnowledgeServiceImpl(KnowledgeRepository knowledgeRepository, Validator validator,
+                                StudentService studentService){
         this.knowledgeRepository = knowledgeRepository;
         this.validator = validator;
+        this.studentService = studentService;
     }
 
     @Override
@@ -49,6 +54,7 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         if(!violations.isEmpty()){
             throw new ResourceValidationException(ENTITY, violations);
         }
+
         return knowledgeRepository.save(knowledge);
     }
 

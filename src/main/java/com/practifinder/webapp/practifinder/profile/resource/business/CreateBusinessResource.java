@@ -28,6 +28,9 @@ public class CreateBusinessResource {
     @NotNull
     private Long rolId;
 
+    @NotNull
+    private String correo;
+
 
     @Size(max = 200)
     private String location;

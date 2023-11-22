@@ -16,7 +16,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class CreateExperienceResource {
 
-
     @NotNull
     @Size(max = 50)
     private String empresa;
@@ -34,4 +33,7 @@ public class CreateExperienceResource {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
+
+    @NotNull
+    private Long studentId;
 }

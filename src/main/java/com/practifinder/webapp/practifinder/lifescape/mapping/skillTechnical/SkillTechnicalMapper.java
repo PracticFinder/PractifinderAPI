@@ -1,8 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.mapping.skillTechnical;
 
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
-import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
-import com.practifinder.webapp.practifinder.lifescape.resource.skillInterpersonal.SkillInterpersonalResource;
 import com.practifinder.webapp.practifinder.lifescape.resource.skillTechnical.CreateSkillTechnicalResource;
 import com.practifinder.webapp.practifinder.lifescape.resource.skillTechnical.SkillTechnicalResource;
 import com.practifinder.webapp.practifinder.lifescape.resource.skillTechnical.UpdateSkillTechnicalResource;

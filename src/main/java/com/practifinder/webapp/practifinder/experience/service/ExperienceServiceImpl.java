@@ -3,6 +3,9 @@ package com.practifinder.webapp.practifinder.experience.service;
 import com.practifinder.webapp.practifinder.experience.domain.model.Experience;
 import com.practifinder.webapp.practifinder.experience.domain.persistence.ExperienceRepository;
 import com.practifinder.webapp.practifinder.experience.domain.service.ExperienceService;
+import com.practifinder.webapp.practifinder.experience.resource.CreateExperienceResource;
+import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
+import com.practifinder.webapp.practifinder.profile.domain.intern.service.StudentService;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
 import jakarta.validation.ConstraintViolation;
@@ -22,9 +25,13 @@ public class ExperienceServiceImpl implements ExperienceService {
     private final Validator validator;
     private final ExperienceRepository experienceRepository;
 
-    public ExperienceServiceImpl(ExperienceRepository experienceRepository, Validator validator) {
+    private final StudentService studentService;
+
+    public ExperienceServiceImpl(ExperienceRepository experienceRepository, Validator validator,
+                                 StudentService studentService) {
         this.experienceRepository= experienceRepository;
         this.validator = validator;
+        this.studentService = studentService;
     }
 
 
@@ -45,11 +52,22 @@ public class ExperienceServiceImpl implements ExperienceService {
     }
 
     @Override
-    public Experience create(Experience experience) {
-        Set<ConstraintViolation<Experience>> violations = validator.validate(experience);
+    public Experience create(CreateExperienceResource createExperienceResource) {
+        Set<ConstraintViolation<CreateExperienceResource>> violations = validator.validate(createExperienceResource);
 
         if(!violations.isEmpty())
             throw new ResourceValidationException(ENTITY, violations);
+
+        Student student = studentService.getById(createExperienceResource.getStudentId());
+
+        Experience experience = new Experience();
+
+        experience.setEmpresa(createExperienceResource.getEmpresa());
+        experience.setCargo(createExperienceResource.getCargo());
+        experience.setDescripcion(createExperienceResource.getDescripcion());
+        experience.setFechaFinalizacion(createExperienceResource.getFechaFinalizacion());
+        experience.setFechaInicio(createExperienceResource.getFechaInicio());
+        experience.setStudent(student);
 
         return experienceRepository.save(experience);
     }

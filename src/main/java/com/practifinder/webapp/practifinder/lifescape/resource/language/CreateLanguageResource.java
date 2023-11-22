@@ -22,4 +22,7 @@ public class CreateLanguageResource {
     @NotBlank
     @Size(max=200)
     private String description;
+
+    @NotNull
+    private Long studentId;
 }

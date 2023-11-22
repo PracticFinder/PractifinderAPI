@@ -1,7 +1,6 @@
 package com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.service;
 
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
-import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

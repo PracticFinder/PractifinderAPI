@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 public class CreateBusinessWithAttributesResource {
 
-    private List<String> locations;
+    private String location;
 
     @URL
     private String imagen;

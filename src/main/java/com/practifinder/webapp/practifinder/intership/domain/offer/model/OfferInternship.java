@@ -1,8 +1,8 @@
 package com.practifinder.webapp.practifinder.intership.domain.offer.model;
 
 
+
 import com.practifinder.webapp.practifinder.profile.domain.business.model.Business;
-import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -84,15 +84,11 @@ public class OfferInternship {
     @Column(name = "salario")
     private Double salario;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "offer")
-    private List<Student> postulantes;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
-
     @ManyToOne
     @JoinColumn(name = "business_id")
     private Business business;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "offer")
+    private List<OfferInternshipStudent> postulantes;
 
 }

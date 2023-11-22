@@ -2,6 +2,7 @@ package com.practifinder.webapp.practifinder.lifescape.resource.knowledge;
 
 import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;

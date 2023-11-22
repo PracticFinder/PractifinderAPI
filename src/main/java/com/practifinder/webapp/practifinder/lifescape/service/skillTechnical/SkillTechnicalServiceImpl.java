@@ -3,9 +3,6 @@ package com.practifinder.webapp.practifinder.lifescape.service.skillTechnical;
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.model.SkillTechnical;
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.repository.SkillTechnicalRepository;
 import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.service.SkillTechnicalService;
-import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
-import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.persistence.SkillInterpersonalRepository;
-import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.service.SkillInterpersonalService;
 import com.practifinder.webapp.shared.exception.ResourceNotFoundException;
 import com.practifinder.webapp.shared.exception.ResourceValidationException;
 import jakarta.validation.ConstraintViolation;
@@ -53,6 +50,7 @@ public class SkillTechnicalServiceImpl implements SkillTechnicalService {
         if(!violations.isEmpty()){
             throw new ResourceValidationException(ENTITY, violations);
         }
+
         return skillTechnicalRepository.save(skillTechnical);
     }
 

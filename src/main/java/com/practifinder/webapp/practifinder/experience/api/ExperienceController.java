@@ -33,7 +33,7 @@ public class ExperienceController {
     }
     @PostMapping
     public ResponseEntity<ExperienceResource> createExperience(@RequestBody CreateExperienceResource resource){
-        return new ResponseEntity<>(mapper.toResource(experienceService.create(mapper.toModel(resource))), HttpStatus.CREATED);
+        return new ResponseEntity<>( mapper.toResource(experienceService.create(resource)), HttpStatus.CREATED);
     }
     @DeleteMapping("{experienceId}")
     public ResponseEntity<?> deleteExperience(@PathVariable Long experienceId){

@@ -7,6 +7,7 @@ import com.practifinder.webapp.practifinder.lifescape.domain.skillTechnical.mode
 import com.practifinder.webapp.practifinder.lifescape.domain.skillinterpersonal.model.SkillInterpersonal;
 import com.practifinder.webapp.practifinder.profile.domain.intern.model.Student;
 import com.practifinder.webapp.practifinder.profile.resource.intern.CreateStudentWithAttributesResource;
+import com.practifinder.webapp.practifinder.profile.resource.intern.StudentResource;
 import com.practifinder.webapp.security.domain.service.communication.RegisterRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +22,13 @@ public interface StudentService {
     Student create(Student student);
     Student update(Long id, Student student);
     ResponseEntity<?> delete(Long studentId);
-    Student getByUsername(String username);
+
     List<Experience> getExperiencesByStudentId(Long studentId);
     List<Knowledge> getKnowledgesByStudentId(Long studentId);
     List<Language> getLanguagesByStudentId(Long studentId);
     List<SkillInterpersonal> getSkillsInterpersonalByStudentId(Long studentId);
     List<SkillTechnical> getSkillsTechnicalByStudentId(Long studentId);
     Student createWithMissingAttributes(Long studentId, CreateStudentWithAttributesResource createStudentWithAttributesResource);
-    Student updateByUsername(Student newStudent);
 
     List<Experience> addExperienceToStudent(Long studentId, Experience experience);
 
@@ -39,5 +39,7 @@ public interface StudentService {
     List<Knowledge> addKnowledgeToStudent(Long studentId, Knowledge knowledge);
 
     List<Language> addLanguageToStudent(Long studentId, Language language);
+
+    List<StudentResource> getAllStudentOffers();
 
 }

@@ -7,14 +7,12 @@ import com.practifinder.webapp.practifinder.profile.mapping.business.BusinessMap
 import com.practifinder.webapp.practifinder.profile.resource.business.BusinessResource;
 import com.practifinder.webapp.practifinder.profile.resource.business.CreateBusinessResource;
 import com.practifinder.webapp.practifinder.profile.resource.business.CreateBusinessWithAttributesResource;
-import com.practifinder.webapp.practifinder.profile.resource.business.UpdateBusinessResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth/business")
